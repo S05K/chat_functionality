@@ -1,10 +1,3 @@
-# require 'rails_helper'
-
-# RSpec.describe ChatChannel, type: :channel do
-#   pending "add some examples to (or delete) #{__FILE__}"
-# end
-# spec/channels/chat_channel_spec.rb
-
 require 'rails_helper'
 
 RSpec.describe ChatChannel, type: :channel do
@@ -12,9 +5,7 @@ RSpec.describe ChatChannel, type: :channel do
   let(:chat) { create(:chat) }
   let(:message) { create(:message) }
   before do
-    # Stub the connection with a user_id
     stub_connection(user_id: user.id)
-    # Subscribe to the channel with the chat id
     subscribe(id: chat.id)
   end
 
@@ -28,7 +19,7 @@ RSpec.describe ChatChannel, type: :channel do
     expect(subscription).to_not have_streams
   end
 
-  describe "#speak" do
+  describe "speak" do
     let(:data) { { 'user_id' => user.id, 'message' => 'Test message' } }
 
     it "creates a new message" do
